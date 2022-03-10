@@ -3,26 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:ZZCraft.item"
+        xmlns:sd="clr-namespace:ZZCraft.item"
         xmlns:local="clr-namespace:ZZCraft"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="ZZCraft" Height="470" Width="800"
-        MaxHeight="470" MaxWidth="800"
-        MinHeight="470" MinWidth="800">
+        Title="ZZCraft" Height="470" Width="900"
+        MaxHeight="470" MaxWidth="900"
+        
+    MinHeight="470" MinWidth="900">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="350"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!--Start: item-->
-        <StackPanel Grid.Column="0" Margin="10">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Height="90" Width="90">
-                <Border Background="Black"  HorizontalAlignment="Left" Width="90" Height="70"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBlock FontFamily="Ubuntu Medium" Text="Name" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
-                    <TextBlock FontFamily="Ubuntu Medium" Text="Count" VerticalAlignment="Bottom" Margin="23,0,0,0" />
-                </StackPanel>
+        <StackPanel Grid.Column="0" Margin="10" Orientation="Vertical">
+            <uc:Items Title="fsd" Count="dsf"/>
+            <uc:Items Title="fsd" Count="dsf"/>
+            <uc:Items Title="fsd" Count="dsf"/>
+            <Button Content="Select" FontSize="25" Height="60" Margin="0,44,0,0" Width="256" HorizontalAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#CC533E"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="FontFamily" Value="Ubuntu Medium"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF9381"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
 
-            </StackPanel>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="220"
+                         CornerRadius="13"
+                         Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
         <!--End: item-->
 
@@ -44,14 +68,51 @@
                             <TextBlock VerticalAlignment="Top"
                                HorizontalAlignment="Center"
                                Text="Craft"
-                               FontFamily="Ubuntu Medium"
                                FontSize="40"/>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0">
-                                    
+                                <!--Craft Items-->
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+
+                                    <Rectangle Width="100" Height="88" Margin="25,5,0,10">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/Image/tree.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                    <Label Content="+" VerticalAlignment="Center" FontSize="20"/>
+
+                                    <Rectangle Width="100" Height="88" Margin="0,5,0,10" HorizontalAlignment="Left">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/Image/tree.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                    <Label Content="+" VerticalAlignment="Center" FontSize="20"/>
+
+                                    <Rectangle Width="100" Height="88" Margin="0,5,0,10" HorizontalAlignment="Left">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/Image/tree.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                    <Label Content="=" VerticalAlignment="Center" FontSize="20"/>
+
+                                    <Rectangle Width="100" Height="88" Margin="0,5,0,10"  HorizontalAlignment="Left">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/Image/tree.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock  Text="Name" Margin="48,0,0,0"  FontSize="25"/>
+                                    <TextBlock  Text="Name" Margin="52,0,0,0" FontSize="25" />
+                                    <TextBlock  Text="Name" Margin="52,0,0,0" FontSize="25"/>
+                                    <TextBlock  Text="Name" Margin="52,0,0,0" FontSize="25"/>
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
@@ -69,8 +130,7 @@
                         <StackPanel Grid.Row="0">
                             <TextBlock VerticalAlignment="Top"
                                HorizontalAlignment="Center"
-                               Text="Roulette"
-                               FontFamily="Ubuntu Medium"
+                               Text="Roulette"                             
                                FontSize="40"/>
                         </StackPanel>
 
@@ -81,23 +141,45 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0">
-                                    <Rectangle Height="110" Width="110" Margin="25,5,0,10" HorizontalAlignment="Left">
+                                    <Rectangle Width="100" Height="88" Margin="25,5,0,10" HorizontalAlignment="Left">
                                         <Rectangle.Fill>
-                                            <ImageBrush ImageSource="{Binding Path=Source,ElementName=item}"/>
+                                            <ImageBrush ImageSource="/Image/tree.png"/>
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    <TextBlock FontFamily="Ubuntu Medium" Text="Name" Margin="48,0,0,0" Width="280" FontSize="25"/>
+                                    <TextBlock Text="Name" Margin="48,0,0,0" Width="280" FontSize="25"/>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1">
-                                    <Button Content="Start" FontFamily="Ubuntu Medium" FontSize="25" Height="60" Margin="0,44,0,0" Width="150" HorizontalAlignment="Center" />
+                                    <Button Content="Start" FontSize="25" Height="60" Margin="0,44,0,0" Width="256" HorizontalAlignment="Center">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="#CC533E"/>
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                                <Setter Property="FontFamily" Value="Poppins Medium"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#FF9381"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+
+
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="220"
+                                                 CornerRadius="13"
+                                                    Background="{TemplateBinding Background}">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+
+                                    </Button>
+                                    
                                 </StackPanel>
                             </Grid>
-                            
-                            
-
                         </StackPanel>
-                        
                     </Grid>
                 </StackPanel>
                 <!--End: Rulet-->

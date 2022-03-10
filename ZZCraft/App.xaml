@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:ZZCraft"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Ubuntu Medium"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Ubuntu Medium"/>
+        </Style>
     </Application.Resources>
 </Application>
