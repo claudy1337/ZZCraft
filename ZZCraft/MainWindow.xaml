@@ -5,8 +5,103 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZZCraft"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ZZCraft" Height="470" Width="800"
+        MaxHeight="470" MaxWidth="800"
+        MinHeight="470" MinWidth="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--Start: item-->
+        <StackPanel Grid.Column="0" Margin="10">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Height="90" Width="90">
+                <Border Background="Black"  HorizontalAlignment="Left" Width="90" Height="70"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock FontFamily="Ubuntu Medium" Text="Name" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                    <TextBlock FontFamily="Ubuntu Medium" Text="Count" VerticalAlignment="Bottom" Margin="23,0,0,0" />
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+        <!--End: item-->
+
+
+        <StackPanel Grid.Column="1" >
+            <Grid Height="450">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="217"/>
+                    <RowDefinition Height="215"/>
+                </Grid.RowDefinitions>
+
+                <!--Start: Craft-->
+                <StackPanel Grid.Row="0" Background="Aquamarine">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Text="Craft"
+                               FontFamily="Ubuntu Medium"
+                               FontSize="40"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0">
+                                    
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <!--End: Craft-->
+
+                <!--Start: Rulet-->
+                <StackPanel Grid.Row="1" Background="Beige" Margin="0,0,0,-19">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <TextBlock VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Text="Roulette"
+                               FontFamily="Ubuntu Medium"
+                               FontSize="40"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Vertical">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <Rectangle Height="110" Width="110" Margin="25,5,0,10" HorizontalAlignment="Left">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{Binding Path=Source,ElementName=item}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock FontFamily="Ubuntu Medium" Text="Name" Margin="48,0,0,0" Width="280" FontSize="25"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1">
+                                    <Button Content="Start" FontFamily="Ubuntu Medium" FontSize="25" Height="60" Margin="0,44,0,0" Width="150" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Grid>
+                            
+                            
+
+                        </StackPanel>
+                        
+                    </Grid>
+                </StackPanel>
+                <!--End: Rulet-->
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
