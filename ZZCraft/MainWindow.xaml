@@ -8,54 +8,85 @@
         xmlns:local="clr-namespace:ZZCraft"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="ZZCraft" Height="470" Width="900"
-        MaxHeight="470" MaxWidth="900"
-        
-    MinHeight="470" MinWidth="900">
+        Title="ZZCraft" Height="570" Width="900"
+        MaxHeight="570" MaxWidth="900"
+        MinHeight="570" MinWidth="900">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="390"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
         <!--Start: item-->
-        <StackPanel Grid.Column="0" Margin="10" Orientation="Vertical">
-            <uc:Items Title="fsd" Count="dsf"/>
-            <uc:Items Title="fsd" Count="dsf"/>
-            <uc:Items Title="fsd" Count="dsf"/>
-            <Button Content="Select" FontSize="25" Height="60" Margin="0,44,0,0" Width="256" HorizontalAlignment="Center">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#CC533E"/>
-                        <Setter Property="Cursor" Value="Hand"/>
-                        <Setter Property="FontFamily" Value="Ubuntu Medium"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FF9381"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+        <StackPanel Grid.Column="0" Background="White">
+            <Grid Height="544">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="459"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    
 
+                        <StackPanel Orientation="Horizontal">
+                            
+                        </StackPanel>
+                    <ListView Name="listView1" Background="White" Height="464" >
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                                        
+                                    
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--Image-->
+                                                
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                       
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Count}"/>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
 
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="220"
-                         CornerRadius="13"
-                         Background="{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                <StackPanel Grid.Row="1" VerticalAlignment="Center" Height="52">
+                    <Button Content="Сhoose" FontSize="25" Height="53" Width="218">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#CC533E"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="FontFamily" Value="Poppins Medium"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF9381"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="220"
+                                 CornerRadius="13"
+                                 Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <!--End: item-->
 
 
-        <StackPanel Grid.Column="1" >
-            <Grid Height="450">
+        <StackPanel Grid.Column="1" Background="Beige">
+            <Grid Height="484">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="217"/>
-                    <RowDefinition Height="215"/>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="300"/>
                 </Grid.RowDefinitions>
 
                 <!--Start: Craft-->
@@ -73,39 +104,41 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
+                                    <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <!--Craft Items-->
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
 
-                                    <Rectangle Width="100" Height="88" Margin="25,5,0,10">
+                                    <Rectangle Width="100" Stroke="Black" Height="88" Margin="25,5,0,10">
                                         <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/tree.png"/>
+                                            <ImageBrush ImageSource="/Image/initial/Log.png"/>
                                         </Rectangle.Fill>
                                     </Rectangle>
 
                                     <Label Content="+" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Rectangle Width="100" Height="88" Margin="0,5,0,10" HorizontalAlignment="Left">
+                                    <Rectangle Stroke="Black" Width="100" Height="88" Margin="0,5,0,10" HorizontalAlignment="Left">
                                         <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/tree.png"/>
+                                            <ImageBrush ImageSource="/Image/initial/fire.png"/>
                                         </Rectangle.Fill>
                                     </Rectangle>
 
                                     <Label Content="+" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Rectangle Width="100" Height="88" Margin="0,5,0,10" HorizontalAlignment="Left">
+                                    <Rectangle Stroke="Black" Width="100" Height="88" Margin="0,5,0,10" HorizontalAlignment="Left">
                                         <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/tree.png"/>
+                                            <ImageBrush ImageSource="/Image/initial/paper.png"/>
                                         </Rectangle.Fill>
                                     </Rectangle>
 
                                     <Label Content="=" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Rectangle Width="100" Height="88" Margin="0,5,0,10"  HorizontalAlignment="Left">
+                                    <Rectangle Stroke="Black" Width="100" Height="88" Margin="0,5,0,10"  HorizontalAlignment="Left">
                                         <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/tree.png"/>
+                                            <ImageBrush ImageSource="/Image/initial/Charcoal.png"/>
                                         </Rectangle.Fill>
                                     </Rectangle>
+
 
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -114,43 +147,8 @@
                                     <TextBlock  Text="Name" Margin="52,0,0,0" FontSize="25"/>
                                     <TextBlock  Text="Name" Margin="52,0,0,0" FontSize="25"/>
                                 </StackPanel>
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-                <!--End: Craft-->
-
-                <!--Start: Rulet-->
-                <StackPanel Grid.Row="1" Background="Beige" Margin="0,0,0,-19">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0">
-                            <TextBlock VerticalAlignment="Top"
-                               HorizontalAlignment="Center"
-                               Text="Roulette"                             
-                               FontSize="40"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="1" Orientation="Vertical">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
-                                    <Rectangle Width="100" Height="88" Margin="25,5,0,10" HorizontalAlignment="Left">
-                                        <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/tree.png"/>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-                                    <TextBlock Text="Name" Margin="48,0,0,0" Width="280" FontSize="25"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="1">
-                                    <Button Content="Start" FontSize="25" Height="60" Margin="0,44,0,0" Width="256" HorizontalAlignment="Center">
+                                <StackPanel Grid.Row="2" Margin="0,30,0,0">
+                                    <Button Content="Craft" FontSize="25" Height="60" Width="256" HorizontalAlignment="Center">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="#CC533E"/>
@@ -176,7 +174,76 @@
                                         </Button.Template>
 
                                     </Button>
-                                    
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+
+                    </Grid>
+                </StackPanel>
+                <!--End: Craft-->
+
+                <!--Start: Rulet-->
+                <StackPanel Grid.Row="1" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Text="Roulette"                             
+                               FontSize="40"/>
+                            <TextBlock HorizontalAlignment="Center"  Text="{Binding Time,
+                                  RelativeSource={RelativeSource FindAncestor,
+                                                                 AncestorType={x:Type local:MainWindow}}}" x:Name="timerTick" FontSize="40"  Margin="130,0,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Vertical">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <Rectangle Stroke="Black" Width="100" Height="88" Margin="25,5,0,10" HorizontalAlignment="Left">
+                                        <Rectangle.Fill>
+                                            <ImageBrush x:Name="imgRnd" ImageSource="{Binding img}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                    <TextBlock Text="Name" Margin="48,0,0,0" Width="280" FontSize="25"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1">
+                                    <Button Content="Start" FontSize="25" Height="60" Margin="0,44,0,0" Width="256" HorizontalAlignment="Center" x:Name="BrndItem" Click="BrndItem_Click">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="#CC533E"/>
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                                <Setter Property="FontFamily" Value="Poppins Medium"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#FF9381"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+
+
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="220"
+                                                 CornerRadius="13"
+                                                    Background="{TemplateBinding Background}">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
