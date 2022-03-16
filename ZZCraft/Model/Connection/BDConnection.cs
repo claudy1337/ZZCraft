@@ -10,6 +10,6 @@ namespace ZZCraft.Model.Connection
 {
     internal class BDConnection
     {
-       public static BDCraftZZEntities1 connection = new BDCraftZZEntities1();
+       public static BDCraftZZEntities2 connection = new BDCraftZZEntities2();
     }
 }

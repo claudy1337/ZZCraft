@@ -26,7 +26,7 @@ namespace ZZCraft
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Model.BDCraftZZEntities1 db = new Model.BDCraftZZEntities1();
+        public static Model.BDCraftZZEntities2 db = new Model.BDCraftZZEntities2();
         private DispatcherTimer _timer;
 
         public static readonly DependencyProperty TimeProperty = DependencyProperty.Register(
@@ -38,8 +38,19 @@ namespace ZZCraft
         public MainWindow()
         {
             InitializeComponent();
-            listView1.ItemsSource = db.InitialRes.ToList();
+            Refresh();
+            Seconds = 10;
+            Time = TimeSpan.FromSeconds(Seconds);
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1d);
+            _timer.Tick += new EventHandler(Timer_Tick);
+            _timer.Start();
             
+        }
+        public void Refresh()
+        {
+            listView1.ItemsSource = null;
+            listView1.ItemsSource = db.InitialDrop.ToList();
         }
 
         private void OnTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -51,25 +62,32 @@ namespace ZZCraft
         {
             try
             {
-                Seconds = 10;
-
+                BrndItem.IsEnabled = true;
+                _timer.Stop();
                 Time = TimeSpan.FromSeconds(Seconds);
-                _timer = new DispatcherTimer();
-                _timer.Interval = TimeSpan.FromSeconds(1d);
-                _timer.Tick += new EventHandler(Timer_Tick);
                 _timer.Start();
-
                 Random random = new Random();
-                int value = random.Next(1, 19);
-                Model.InitialRes initial = BDConnection.connection.InitialRes.FirstOrDefault(u => u.id == value);
+                int resurs = random.Next(1, 19);
+                int counts = random.Next(1, 4);
+                Model.InitialRes initial = BDConnection.connection.InitialRes.FirstOrDefault(u => u.id == resurs);
+                CountRnd.Text = counts.ToString();
                 imageRnd.Source = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
                 NameRnd.Text = initial.Name.ToString();
-                CountRnd.Text = initial.Count.ToString();
+
+
+                Model.InitialDrop usrInvent = new Model.InitialDrop() { idInitialRes = initial.id, Count= counts};
+                
+                db.InitialDrop.Add(usrInvent);
+                db.SaveChanges();
+                
+               
             }
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            Refresh();
+            
 
         }
         public int Seconds
@@ -105,6 +123,11 @@ namespace ZZCraft
                 
                
             };
+        }
+
+        private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

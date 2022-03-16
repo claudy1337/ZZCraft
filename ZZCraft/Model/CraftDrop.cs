@@ -12,23 +12,20 @@ namespace ZZCraft.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Recipe
+    public partial class CraftDrop
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Recipe()
+        public CraftDrop()
         {
-            this.CraftRes = new HashSet<CraftRes>();
+            this.UserInvent = new HashSet<UserInvent>();
         }
     
         public int id { get; set; }
-        public Nullable<int> objectOne { get; set; }
-        public Nullable<int> objectTwo { get; set; }
-        public Nullable<int> objectThree { get; set; }
+        public Nullable<int> idCraftDrop { get; set; }
+        public Nullable<int> Count { get; set; }
     
+        public virtual CraftRes CraftRes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CraftRes> CraftRes { get; set; }
-        public virtual InitialRes InitialRes { get; set; }
-        public virtual InitialRes InitialRes1 { get; set; }
-        public virtual InitialRes InitialRes2 { get; set; }
+        public virtual ICollection<UserInvent> UserInvent { get; set; }
     }
 }

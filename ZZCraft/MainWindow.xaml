@@ -30,11 +30,11 @@
                         <StackPanel Orientation="Horizontal">
                             
                         </StackPanel>
-                    <ListView Name="listView1" Background="White" Height="464" >
+                    <ListView Name="listView1" Background="White" Height="464" SelectionChanged="listView1_SelectionChanged" >
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                                    <GridViewColumn DisplayMemberBinding="{Binding InitialRes.Name}">
                                         
                                     
                                         <GridViewColumn.CellTemplate>
@@ -200,14 +200,14 @@
                                                                  AncestorType={x:Type local:MainWindow}}}" x:Name="timerTick" FontSize="40"  Margin="130,0,0,0"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20,0,0,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/> 
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" Height="auto">
-                                    <Image Width="100" Height="100" Margin="25,5,0,10" x:Name="imageRnd" HorizontalAlignment="Left"/>
+                                    <Image Width="100" Height="100" Margin="-150,5,0,10" x:Name="imageRnd" HorizontalAlignment="Center"/>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Name" FontSize="25" HorizontalAlignment="Left" x:Name="NameRnd"/>
                                         <TextBlock Text="Count" FontSize="25" Margin="65,0,0,0" HorizontalAlignment="Right" x:Name="CountRnd" />
@@ -216,7 +216,7 @@
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1">
-                                    <Button Content="Start" FontSize="25" Height="60" Margin="0,44,0,0" Width="256" HorizontalAlignment="Center" x:Name="BrndItem" Click="BrndItem_Click">
+                                    <Button Content="Start" FontSize="25" Height="60" Margin="0,44,0,0" Width="226" HorizontalAlignment="Center" x:Name="BrndItem" Click="BrndItem_Click">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="#CC533E"/>

@@ -13,10 +13,10 @@ namespace ZZCraft.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BDCraftZZEntities1 : DbContext
+    public partial class BDCraftZZEntities2 : DbContext
     {
-        public BDCraftZZEntities1()
-            : base("name=BDCraftZZEntities1")
+        public BDCraftZZEntities2()
+            : base("name=BDCraftZZEntities2")
         {
         }
     
@@ -25,9 +25,12 @@ namespace ZZCraft.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CraftItems> CraftItems { get; set; }
+        public virtual DbSet<CraftDrop> CraftDrop { get; set; }
+        public virtual DbSet<CraftRes> CraftRes { get; set; }
+        public virtual DbSet<InitialDrop> InitialDrop { get; set; }
         public virtual DbSet<InitialRes> InitialRes { get; set; }
         public virtual DbSet<Recipe> Recipe { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<UserInvent> UserInvent { get; set; }
     }
 }

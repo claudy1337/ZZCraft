@@ -5,20 +5,37 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище BDCraftZZModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CraftItems">
+        <EntityType Name="CraftDrop">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Count" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="IdRecipe" Type="int" Nullable="false" />
+          <Property Name="idCraftDrop" Type="int" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="CraftRes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="idRecipe" Type="int" Nullable="false" />
+          <Property Name="img" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InitialDrop">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idInitialRes" Type="int" />
+          <Property Name="Count" Type="int" />
         </EntityType>
         <EntityType Name="InitialRes">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="img" Type="nvarchar" MaxLength="50" />
@@ -42,15 +59,47 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_CraftItems_Recipe">
+        <EntityType Name="UserInvent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCraftDrop" Type="int" />
+          <Property Name="idInitialDrop" Type="int" />
+        </EntityType>
+        <Association Name="FK_CraftDrop_CraftRes">
+          <End Role="CraftRes" Type="Self.CraftRes" Multiplicity="0..1" />
+          <End Role="CraftDrop" Type="Self.CraftDrop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CraftRes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CraftDrop">
+              <PropertyRef Name="idCraftDrop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CraftRes_Recipe">
           <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
-          <End Role="CraftItems" Type="Self.CraftItems" Multiplicity="*" />
+          <End Role="CraftRes" Type="Self.CraftRes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="CraftItems">
-              <PropertyRef Name="IdRecipe" />
+            <Dependent Role="CraftRes">
+              <PropertyRef Name="idRecipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InitialDrop_InitialRes">
+          <End Role="InitialRes" Type="Self.InitialRes" Multiplicity="0..1" />
+          <End Role="InitialDrop" Type="Self.InitialDrop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InitialRes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="InitialDrop">
+              <PropertyRef Name="idInitialRes" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -91,13 +140,24 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище BDCraftZZModelContainer">
-          <EntitySet Name="CraftItems" EntityType="Self.CraftItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CraftDrop" EntityType="Self.CraftDrop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CraftRes" EntityType="Self.CraftRes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InitialDrop" EntityType="Self.InitialDrop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InitialRes" EntityType="Self.InitialRes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_CraftItems_Recipe" Association="Self.FK_CraftItems_Recipe">
+          <EntitySet Name="UserInvent" EntityType="Self.UserInvent" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CraftDrop_CraftRes" Association="Self.FK_CraftDrop_CraftRes">
+            <End Role="CraftRes" EntitySet="CraftRes" />
+            <End Role="CraftDrop" EntitySet="CraftDrop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CraftRes_Recipe" Association="Self.FK_CraftRes_Recipe">
             <End Role="Recipe" EntitySet="Recipe" />
-            <End Role="CraftItems" EntitySet="CraftItems" />
+            <End Role="CraftRes" EntitySet="CraftRes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InitialDrop_InitialRes" Association="Self.FK_InitialDrop_InitialRes">
+            <End Role="InitialRes" EntitySet="InitialRes" />
+            <End Role="InitialDrop" EntitySet="InitialDrop" />
           </AssociationSet>
           <AssociationSet Name="FK_Recipe_InitialRes" Association="Self.FK_Recipe_InitialRes">
             <End Role="InitialRes" EntitySet="InitialRes" />
@@ -116,27 +176,50 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDCraftZZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CraftItems">
+        <EntityType Name="CraftDrop">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Count" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="IdRecipe" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_CraftItems_Recipe" FromRole="CraftItems" ToRole="Recipe" />
+          <Property Name="idCraftDrop" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="CraftRes" Relationship="Self.FK_CraftDrop_CraftRes" FromRole="CraftDrop" ToRole="CraftRes" />
+          <NavigationProperty Name="UserInvent" Relationship="Self.FK_UserInvent_CraftDrop" FromRole="CraftDrop" ToRole="UserInvent" />
+        </EntityType>
+        <EntityType Name="CraftRes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="idRecipe" Type="Int32" Nullable="false" />
+          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CraftDrop" Relationship="Self.FK_CraftDrop_CraftRes" FromRole="CraftRes" ToRole="CraftDrop" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_CraftRes_Recipe" FromRole="CraftRes" ToRole="Recipe" />
+        </EntityType>
+        <EntityType Name="InitialDrop">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idInitialRes" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="InitialRes" Relationship="Self.FK_InitialDrop_InitialRes" FromRole="InitialDrop" ToRole="InitialRes" />
+          <NavigationProperty Name="UserInvent" Relationship="Self.FK_UserInvent_InitialDrop" FromRole="InitialDrop" ToRole="UserInvent" />
         </EntityType>
         <EntityType Name="InitialRes">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InitialDrop" Relationship="Self.FK_InitialDrop_InitialRes" FromRole="InitialRes" ToRole="InitialDrop" />
           <NavigationProperty Name="Recipe" Relationship="Self.FK_Recipe_InitialRes" FromRole="InitialRes" ToRole="Recipe" />
           <NavigationProperty Name="Recipe1" Relationship="Self.FK_Recipe_InitialRes1" FromRole="InitialRes" ToRole="Recipe" />
           <NavigationProperty Name="Recipe2" Relationship="Self.FK_Recipe_InitialRes2" FromRole="InitialRes" ToRole="Recipe" />
-          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -146,7 +229,7 @@
           <Property Name="objectOne" Type="Int32" />
           <Property Name="objectTwo" Type="Int32" />
           <Property Name="objectThree" Type="Int32" />
-          <NavigationProperty Name="CraftItems" Relationship="Self.FK_CraftItems_Recipe" FromRole="Recipe" ToRole="CraftItems" />
+          <NavigationProperty Name="CraftRes" Relationship="Self.FK_CraftRes_Recipe" FromRole="Recipe" ToRole="CraftRes" />
           <NavigationProperty Name="InitialRes" Relationship="Self.FK_Recipe_InitialRes" FromRole="Recipe" ToRole="InitialRes" />
           <NavigationProperty Name="InitialRes1" Relationship="Self.FK_Recipe_InitialRes1" FromRole="Recipe" ToRole="InitialRes" />
           <NavigationProperty Name="InitialRes2" Relationship="Self.FK_Recipe_InitialRes2" FromRole="Recipe" ToRole="InitialRes" />
@@ -161,15 +244,73 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_CraftItems_Recipe">
+        <EntityType Name="UserInvent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCraftDrop" Type="Int32" />
+          <Property Name="idInitialDrop" Type="Int32" />
+          <NavigationProperty Name="CraftDrop" Relationship="Self.FK_UserInvent_CraftDrop" FromRole="UserInvent" ToRole="CraftDrop" />
+          <NavigationProperty Name="InitialDrop" Relationship="Self.FK_UserInvent_InitialDrop" FromRole="UserInvent" ToRole="InitialDrop" />
+        </EntityType>
+        <Association Name="FK_CraftDrop_CraftRes">
+          <End Role="CraftRes" Type="Self.CraftRes" Multiplicity="0..1" />
+          <End Role="CraftDrop" Type="Self.CraftDrop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CraftRes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CraftDrop">
+              <PropertyRef Name="idCraftDrop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInvent_CraftDrop">
+          <End Role="CraftDrop" Type="Self.CraftDrop" Multiplicity="0..1" />
+          <End Role="UserInvent" Type="Self.UserInvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CraftDrop">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserInvent">
+              <PropertyRef Name="idCraftDrop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CraftRes_Recipe">
           <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
-          <End Role="CraftItems" Type="Self.CraftItems" Multiplicity="*" />
+          <End Role="CraftRes" Type="Self.CraftRes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="CraftItems">
-              <PropertyRef Name="IdRecipe" />
+            <Dependent Role="CraftRes">
+              <PropertyRef Name="idRecipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InitialDrop_InitialRes">
+          <End Role="InitialRes" Type="Self.InitialRes" Multiplicity="0..1" />
+          <End Role="InitialDrop" Type="Self.InitialDrop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InitialRes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="InitialDrop">
+              <PropertyRef Name="idInitialRes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInvent_InitialDrop">
+          <End Role="InitialDrop" Type="Self.InitialDrop" Multiplicity="0..1" />
+          <End Role="UserInvent" Type="Self.UserInvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InitialDrop">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserInvent">
+              <PropertyRef Name="idInitialDrop" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -209,14 +350,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BDCraftZZEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CraftItems" EntityType="Self.CraftItems" />
+        <EntityContainer Name="BDCraftZZEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CraftDrop" EntityType="Self.CraftDrop" />
+          <EntitySet Name="CraftRes" EntityType="Self.CraftRes" />
+          <EntitySet Name="InitialDrop" EntityType="Self.InitialDrop" />
           <EntitySet Name="InitialRes" EntityType="Self.InitialRes" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_CraftItems_Recipe" Association="Self.FK_CraftItems_Recipe">
+          <EntitySet Name="UserInvent" EntityType="Self.UserInvent" />
+          <AssociationSet Name="FK_CraftDrop_CraftRes" Association="Self.FK_CraftDrop_CraftRes">
+            <End Role="CraftRes" EntitySet="CraftRes" />
+            <End Role="CraftDrop" EntitySet="CraftDrop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInvent_CraftDrop" Association="Self.FK_UserInvent_CraftDrop">
+            <End Role="CraftDrop" EntitySet="CraftDrop" />
+            <End Role="UserInvent" EntitySet="UserInvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CraftRes_Recipe" Association="Self.FK_CraftRes_Recipe">
             <End Role="Recipe" EntitySet="Recipe" />
-            <End Role="CraftItems" EntitySet="CraftItems" />
+            <End Role="CraftRes" EntitySet="CraftRes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InitialDrop_InitialRes" Association="Self.FK_InitialDrop_InitialRes">
+            <End Role="InitialRes" EntitySet="InitialRes" />
+            <End Role="InitialDrop" EntitySet="InitialDrop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInvent_InitialDrop" Association="Self.FK_UserInvent_InitialDrop">
+            <End Role="InitialDrop" EntitySet="InitialDrop" />
+            <End Role="UserInvent" EntitySet="UserInvent" />
           </AssociationSet>
           <AssociationSet Name="FK_Recipe_InitialRes" Association="Self.FK_Recipe_InitialRes">
             <End Role="InitialRes" EntitySet="InitialRes" />
@@ -236,24 +396,43 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище BDCraftZZModelContainer" CdmEntityContainer="BDCraftZZEntities1">
-          <EntitySetMapping Name="CraftItems">
-            <EntityTypeMapping TypeName="BDCraftZZModel.CraftItems">
-              <MappingFragment StoreEntitySet="CraftItems">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BDCraftZZModelContainer" CdmEntityContainer="BDCraftZZEntities2">
+          <EntitySetMapping Name="CraftDrop">
+            <EntityTypeMapping TypeName="BDCraftZZModel.CraftDrop">
+              <MappingFragment StoreEntitySet="CraftDrop">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idCraftDrop" ColumnName="idCraftDrop" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CraftRes">
+            <EntityTypeMapping TypeName="BDCraftZZModel.CraftRes">
+              <MappingFragment StoreEntitySet="CraftRes">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="IdRecipe" ColumnName="IdRecipe" />
+                <ScalarProperty Name="idRecipe" ColumnName="idRecipe" />
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InitialDrop">
+            <EntityTypeMapping TypeName="BDCraftZZModel.InitialDrop">
+              <MappingFragment StoreEntitySet="InitialDrop">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idInitialRes" ColumnName="idInitialRes" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InitialRes">
             <EntityTypeMapping TypeName="BDCraftZZModel.InitialRes">
               <MappingFragment StoreEntitySet="InitialRes">
-                <ScalarProperty Name="img" ColumnName="img" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="img" ColumnName="img" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -275,6 +454,15 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInvent">
+            <EntityTypeMapping TypeName="BDCraftZZModel.UserInvent">
+              <MappingFragment StoreEntitySet="UserInvent">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idCraftDrop" ColumnName="idCraftDrop" />
+                <ScalarProperty Name="idInitialDrop" ColumnName="idInitialDrop" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
