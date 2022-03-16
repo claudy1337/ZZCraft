@@ -162,21 +162,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\initial\stick.png" />
-    <Resource Include="Image\initial\Charcoal.png" />
-    <Resource Include="Image\initial\Cobweb.png" />
+    <Resource Include="Image\initial\charcoal.png" />
+    <Resource Include="Image\initial\cobweb.png" />
     <Resource Include="Image\initial\fire.png" />
-    <Resource Include="Image\initial\Flint.png" />
-    <Resource Include="Image\initial\Leaves.png" />
-    <Resource Include="Image\initial\Log.png" />
-    <Resource Include="Image\initial\Meal.png" />
-    <Resource Include="Image\initial\Paper.png" />
-    <Resource Include="Image\initial\Sand.png" />
+    <Resource Include="Image\initial\flint.png" />
+    <Resource Include="Image\initial\leaves.png" />
+    <Resource Include="Image\initial\log.png" />
+    <Resource Include="Image\initial\meal.png" />
+    <Resource Include="Image\initial\paper.png" />
+    <Resource Include="Image\initial\sand.png" />
     <Resource Include="Image\initial\seeds.png" />
     <Resource Include="Image\initial\stone.png" />
-    <Resource Include="Image\initial\String.png" />
-    <Resource Include="Image\initial\Twilight Forest.png" />
+    <Resource Include="Image\initial\string.png" />
+    <Resource Include="Image\initial\twilight.png" />
     <Resource Include="Image\initial\water.png" />
-    <Resource Include="Image\initial\Wool.png" />
+    <Resource Include="Image\initial\wool.png" />
     <Resource Include="Image\initial\skrepka.jpeg" />
     <Resource Include="Image\initial\worm.jpeg" />
     <Content Include="Model\Model1.Context.tt">

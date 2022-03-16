@@ -39,6 +39,7 @@ namespace ZZCraft
         {
             InitializeComponent();
             listView1.ItemsSource = db.InitialRes.ToList();
+            
         }
 
         private void OnTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -58,12 +59,12 @@ namespace ZZCraft
                 _timer.Tick += new EventHandler(Timer_Tick);
                 _timer.Start();
 
-
                 Random random = new Random();
                 int value = random.Next(1, 19);
-                Model.InitialRes initial = BDConnection.connection.InitialRes.FirstOrDefault(u => u.id == 5);
-                MessageBox.Show(initial.Name);
-               
+                Model.InitialRes initial = BDConnection.connection.InitialRes.FirstOrDefault(u => u.id == value);
+                imageRnd.Source = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
+                NameRnd.Text = initial.Name.ToString();
+                CountRnd.Text = initial.Count.ToString();
             }
             catch (NullReferenceException ex)
             {
@@ -91,7 +92,7 @@ namespace ZZCraft
             {
                 var timer = (DispatcherTimer)sender;
                 timer.Stop();
-                Title = "Всё!";
+                
             }
         }
 

@@ -39,8 +39,8 @@
                                     
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <!--Image-->
-                                                
+                                                <Image x:Name="usrInitial"/>
+
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                        
@@ -83,7 +83,7 @@
 
 
         <StackPanel Grid.Column="1" Background="Beige">
-            <Grid Height="484">
+            <Grid Height="553">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="300"/>
                     <RowDefinition Height="300"/>
@@ -187,7 +187,7 @@
                 <StackPanel Grid.Row="1" >
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="60"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -204,16 +204,15 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition/> 
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
-                                    <Rectangle Stroke="Black" Width="100" Height="88" Margin="25,5,0,10" HorizontalAlignment="Left">
-                                        <Rectangle.Fill>
-                                            <ImageBrush x:Name="imgRnd" ImageSource="{Binding img}"/>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-
-                                    <TextBlock Text="Name" Margin="48,0,0,0" Width="280" FontSize="25"/>
+                                <StackPanel Grid.Column="0" Height="auto">
+                                    <Image Width="100" Height="100" Margin="25,5,0,10" x:Name="imageRnd" HorizontalAlignment="Left"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Name" FontSize="25" HorizontalAlignment="Left" x:Name="NameRnd"/>
+                                        <TextBlock Text="Count" FontSize="25" Margin="65,0,0,0" HorizontalAlignment="Right" x:Name="CountRnd" />
+                                    </StackPanel>
+                                   
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1">
