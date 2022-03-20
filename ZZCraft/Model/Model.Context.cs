@@ -32,5 +32,6 @@ namespace ZZCraft.Model
         public virtual DbSet<Recipe> Recipe { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserInvent> UserInvent { get; set; }
+        public virtual DbSet<InitialDrops> InitialDrops { get; set; }
     }
 }

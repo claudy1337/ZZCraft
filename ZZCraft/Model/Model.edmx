@@ -23,6 +23,8 @@
           <Property Name="idRecipe" Type="int" Nullable="false" />
           <Property Name="img" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "BDCraftZZ.dbo.InitialDrop" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="InitialDrop">
           <Key>
             <PropertyRef Name="id" />
@@ -30,6 +32,14 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idInitialRes" Type="int" />
           <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="InitialDrops">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iDInitialRes" Type="int" Nullable="false" />
+          <Property Name="Counts" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="InitialRes">
           <Key>
@@ -91,15 +101,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InitialDrop_InitialRes">
-          <End Role="InitialRes" Type="Self.InitialRes" Multiplicity="0..1" />
-          <End Role="InitialDrop" Type="Self.InitialDrop" Multiplicity="*" />
+        <Association Name="FK_InitialDrops_InitialRes">
+          <End Role="InitialRes" Type="Self.InitialRes" Multiplicity="1" />
+          <End Role="InitialDrops" Type="Self.InitialDrops" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InitialRes">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="InitialDrop">
-              <PropertyRef Name="idInitialRes" />
+            <Dependent Role="InitialDrops">
+              <PropertyRef Name="iDInitialRes" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -142,11 +152,18 @@
         <EntityContainer Name="Хранилище BDCraftZZModelContainer">
           <EntitySet Name="CraftDrop" EntityType="Self.CraftDrop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CraftRes" EntityType="Self.CraftRes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InitialDrop" EntityType="Self.InitialDrop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InitialDrops" EntityType="Self.InitialDrops" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InitialRes" EntityType="Self.InitialRes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInvent" EntityType="Self.UserInvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InitialDrop" EntityType="Self.InitialDrop" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [InitialDrop].[id] AS [id], 
+    [InitialDrop].[idInitialRes] AS [idInitialRes], 
+    [InitialDrop].[Count] AS [Count]
+    FROM [dbo].[InitialDrop] AS [InitialDrop]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_CraftDrop_CraftRes" Association="Self.FK_CraftDrop_CraftRes">
             <End Role="CraftRes" EntitySet="CraftRes" />
             <End Role="CraftDrop" EntitySet="CraftDrop" />
@@ -155,9 +172,9 @@
             <End Role="Recipe" EntitySet="Recipe" />
             <End Role="CraftRes" EntitySet="CraftRes" />
           </AssociationSet>
-          <AssociationSet Name="FK_InitialDrop_InitialRes" Association="Self.FK_InitialDrop_InitialRes">
+          <AssociationSet Name="FK_InitialDrops_InitialRes" Association="Self.FK_InitialDrops_InitialRes">
             <End Role="InitialRes" EntitySet="InitialRes" />
-            <End Role="InitialDrop" EntitySet="InitialDrop" />
+            <End Role="InitialDrops" EntitySet="InitialDrops" />
           </AssociationSet>
           <AssociationSet Name="FK_Recipe_InitialRes" Association="Self.FK_Recipe_InitialRes">
             <End Role="InitialRes" EntitySet="InitialRes" />
@@ -220,6 +237,7 @@
           <NavigationProperty Name="Recipe" Relationship="Self.FK_Recipe_InitialRes" FromRole="InitialRes" ToRole="Recipe" />
           <NavigationProperty Name="Recipe1" Relationship="Self.FK_Recipe_InitialRes1" FromRole="InitialRes" ToRole="Recipe" />
           <NavigationProperty Name="Recipe2" Relationship="Self.FK_Recipe_InitialRes2" FromRole="InitialRes" ToRole="Recipe" />
+          <NavigationProperty Name="InitialDrops" Relationship="BDCraftZZModel.FK_InitialDrops_InitialRes" FromRole="InitialRes" ToRole="InitialDrops" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -390,7 +408,33 @@
             <End Role="InitialRes" EntitySet="InitialRes" />
             <End Role="Recipe" EntitySet="Recipe" />
           </AssociationSet>
+          <EntitySet Name="InitialDrops" EntityType="BDCraftZZModel.InitialDrops" />
+          <AssociationSet Name="FK_InitialDrops_InitialRes" Association="BDCraftZZModel.FK_InitialDrops_InitialRes">
+            <End Role="InitialRes" EntitySet="InitialRes" />
+            <End Role="InitialDrops" EntitySet="InitialDrops" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="InitialDrops">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="iDInitialRes" Type="Int32" Nullable="false" />
+          <Property Name="Counts" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InitialRes" Relationship="BDCraftZZModel.FK_InitialDrops_InitialRes" FromRole="InitialDrops" ToRole="InitialRes" />
+        </EntityType>
+        <Association Name="FK_InitialDrops_InitialRes">
+          <End Type="BDCraftZZModel.InitialRes" Role="InitialRes" Multiplicity="1" />
+          <End Type="BDCraftZZModel.InitialDrops" Role="InitialDrops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InitialRes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="InitialDrops">
+              <PropertyRef Name="iDInitialRes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -463,6 +507,15 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idCraftDrop" ColumnName="idCraftDrop" />
                 <ScalarProperty Name="idInitialDrop" ColumnName="idInitialDrop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InitialDrops">
+            <EntityTypeMapping TypeName="BDCraftZZModel.InitialDrops">
+              <MappingFragment StoreEntitySet="InitialDrops">
+                <ScalarProperty Name="Counts" ColumnName="Counts" />
+                <ScalarProperty Name="iDInitialRes" ColumnName="iDInitialRes" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

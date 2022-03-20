@@ -21,6 +21,7 @@ namespace ZZCraft.Model
             this.Recipe = new HashSet<Recipe>();
             this.Recipe1 = new HashSet<Recipe>();
             this.Recipe2 = new HashSet<Recipe>();
+            this.InitialDrops = new HashSet<InitialDrops>();
         }
     
         public int id { get; set; }
@@ -36,5 +37,7 @@ namespace ZZCraft.Model
         public virtual ICollection<Recipe> Recipe1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Recipe> Recipe2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InitialDrops> InitialDrops { get; set; }
     }
 }

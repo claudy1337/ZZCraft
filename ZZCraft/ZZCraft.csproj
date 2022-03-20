@@ -103,6 +103,9 @@
     <Compile Include="Model\InitialDrop.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\InitialDrops.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\InitialRes.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

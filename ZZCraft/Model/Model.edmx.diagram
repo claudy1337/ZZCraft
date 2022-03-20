@@ -20,6 +20,8 @@
         <AssociationConnector Association="BDCraftZZModel.FK_Recipe_InitialRes" ManuallyRouted="false" />
         <AssociationConnector Association="BDCraftZZModel.FK_Recipe_InitialRes1" ManuallyRouted="false" />
         <AssociationConnector Association="BDCraftZZModel.FK_Recipe_InitialRes2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDCraftZZModel.InitialDrops" Width="1.5" PointX="3" PointY="8" />
+        <AssociationConnector Association="BDCraftZZModel.FK_InitialDrops_InitialRes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

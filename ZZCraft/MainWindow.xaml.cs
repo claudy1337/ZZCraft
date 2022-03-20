@@ -50,7 +50,7 @@ namespace ZZCraft
         public void Refresh()
         {
             listView1.ItemsSource = null;
-            listView1.ItemsSource = db.InitialDrop.ToList();
+            listView1.ItemsSource = db.InitialDrops.ToList();
         }
 
         private void OnTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -62,33 +62,45 @@ namespace ZZCraft
         {
             try
             {
-                BrndItem.IsEnabled = true;
                 _timer.Stop();
                 Time = TimeSpan.FromSeconds(Seconds);
                 _timer.Start();
+
+                BrndItem.IsEnabled = true;
                 Random random = new Random();
                 int resurs = random.Next(1, 19);
                 int counts = random.Next(1, 4);
+
+                Model.InitialDrops findInitialDrop = db.InitialDrops.FirstOrDefault(a => a.iDInitialRes == resurs);
                 Model.InitialRes initial = BDConnection.connection.InitialRes.FirstOrDefault(u => u.id == resurs);
+                Model.InitialDrops usrInvent = new Model.InitialDrops() { iDInitialRes = initial.id, Counts = counts };
                 CountRnd.Text = counts.ToString();
                 imageRnd.Source = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
                 NameRnd.Text = initial.Name.ToString();
 
-
-                Model.InitialDrop usrInvent = new Model.InitialDrop() { idInitialRes = initial.id, Count= counts};
-                
-                db.InitialDrop.Add(usrInvent);
-                db.SaveChanges();
-                
-               
+                if (findInitialDrop != null)
+                {
+                    findInitialDrop = db.InitialDrops.FirstOrDefault(o => o.iDInitialRes == resurs);
+                    if (findInitialDrop != null)
+                    {
+                        findInitialDrop.Counts += counts;
+                        db.SaveChanges();
+                        MessageBox.Show("double item");
+                        Refresh();
+                        //return;
+                    }
+                }
+                else
+                {
+                    db.InitialDrops.Add(usrInvent);
+                    db.SaveChanges();
+                    Refresh();
+                }
             }
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            Refresh();
-            
-
         }
         public int Seconds
         {

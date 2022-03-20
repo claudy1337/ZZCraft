@@ -45,7 +45,7 @@
                                         </GridViewColumn.CellTemplate>
                                        
                                     </GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Count}"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Counts}"/>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
