@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="testCraft.xaml.cs">
+      <DependentUpon>testCraft.xaml</DependentUpon>
+    </Compile>
     <Page Include="item\Items.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="testCraft.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Connection\BDConnection.cs" />
@@ -98,9 +105,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CraftRes.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InitialDrop.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\InitialDrops.cs">
@@ -192,10 +196,20 @@
     <Resource Include="Image\initial\skrepka.jpeg" />
     <Resource Include="Image\initial\worm.jpeg" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Image\CraftItems\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Image\CraftItems\Rod.png" />
+    <Resource Include="Image\CraftItems\Pickaxe.png" />
+    <Resource Include="Image\CraftItems\Sword.png" />
+    <Resource Include="Image\CraftItems\bed.png" />
+    <Resource Include="Image\CraftItems\glass.png" />
+    <Resource Include="Image\CraftItems\campfire.png" />
+    <Resource Include="Image\CraftItems\vines.png" />
+    <Resource Include="Image\CraftItems\Wheat.png" />
+    <Resource Include="Image\CraftItems\axe.png" />
+    <Resource Include="Image\CraftItems\wood.png" />
+    <Resource Include="Image\CraftItems\table.png" />
+    <Resource Include="Image\CraftItems\book.png" />
     <Content Include="Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>

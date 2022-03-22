@@ -7,7 +7,6 @@
       <Diagram DiagramId="1144b96ca4d34e90864829bb8554f8f8" Name="Diagram1">
         <EntityTypeShape EntityType="BDCraftZZModel.CraftDrop" Width="1.5" PointX="7.5" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BDCraftZZModel.CraftRes" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDCraftZZModel.InitialDrop" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BDCraftZZModel.InitialRes" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BDCraftZZModel.Recipe" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BDCraftZZModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
@@ -15,8 +14,6 @@
         <AssociationConnector Association="BDCraftZZModel.FK_CraftDrop_CraftRes" ManuallyRouted="false" />
         <AssociationConnector Association="BDCraftZZModel.FK_UserInvent_CraftDrop" ManuallyRouted="false" />
         <AssociationConnector Association="BDCraftZZModel.FK_CraftRes_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="BDCraftZZModel.FK_InitialDrop_InitialRes" ManuallyRouted="false" />
-        <AssociationConnector Association="BDCraftZZModel.FK_UserInvent_InitialDrop" ManuallyRouted="false" />
         <AssociationConnector Association="BDCraftZZModel.FK_Recipe_InitialRes" ManuallyRouted="false" />
         <AssociationConnector Association="BDCraftZZModel.FK_Recipe_InitialRes1" ManuallyRouted="false" />
         <AssociationConnector Association="BDCraftZZModel.FK_Recipe_InitialRes2" ManuallyRouted="false" />

@@ -17,7 +17,6 @@ namespace ZZCraft.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public InitialRes()
         {
-            this.InitialDrop = new HashSet<InitialDrop>();
             this.Recipe = new HashSet<Recipe>();
             this.Recipe1 = new HashSet<Recipe>();
             this.Recipe2 = new HashSet<Recipe>();
@@ -29,8 +28,6 @@ namespace ZZCraft.Model
         public int Count { get; set; }
         public string img { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InitialDrop> InitialDrop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Recipe> Recipe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

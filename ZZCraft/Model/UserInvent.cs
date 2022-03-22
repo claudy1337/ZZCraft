@@ -19,6 +19,5 @@ namespace ZZCraft.Model
         public Nullable<int> idInitialDrop { get; set; }
     
         public virtual CraftDrop CraftDrop { get; set; }
-        public virtual InitialDrop InitialDrop { get; set; }
     }
 }

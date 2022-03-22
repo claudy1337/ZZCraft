@@ -24,36 +24,57 @@
                     <RowDefinition Height="459"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+               
                 <StackPanel Grid.Column="0" Orientation="Vertical">
-                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <!--list initial drop item-->
+                            <TextBlock Text="Initial Item" HorizontalAlignment="Center" FontSize="22"/>
+                            <ListView Name="listView2" Background="White" Height="464" SelectionChanged="listView2_SelectionChanged" >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+                                            <Image Source="{Binding InitialRes.img}" Width="100" Height="100"/>
 
-                        <StackPanel Orientation="Horizontal">
-                            
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding InitialRes.Name}" FontSize="22"/>
+                                                <TextBlock Text="{Binding Counts}" Margin="20,0,0,0" HorizontalAlignment="Center" FontSize="22"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </StackPanel>
-                    <ListView Name="listView1" Background="White" Height="464" SelectionChanged="listView1_SelectionChanged" >
-                        <ListView.View>
-                            <GridView>
-                                <GridView.Columns>
-                                    <GridViewColumn DisplayMemberBinding="{Binding InitialRes.Name}">
-                                        
-                                    
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Image x:Name="usrInitial"/>
 
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                       
-                                    </GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Counts}"/>
-                                </GridView.Columns>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                        <!--list craft drop item-->
+                        <StackPanel Grid.Column="1" >
+                            <TextBlock Text="Craft Item" HorizontalAlignment="Center" FontSize="22"/>
+                            <ListView Name="listView1" Background="White" Height="464" SelectionChanged="listView1_SelectionChanged" >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+                                            <Image Source="{Binding CraftRes.img}" Width="100" Height="100"/>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding CraftRes.Name}" FontSize="22"/>
+                                                <TextBlock Text="{Binding Count}" Margin="20,0,0,0" HorizontalAlignment="Center" FontSize="22"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" VerticalAlignment="Center" Height="52">
-                    <Button Content="Сhoose" FontSize="25" Height="53" Width="218">
+                    <Button Content="Сhoose" FontSize="25" Height="53" Width="218" x:Name="choiseItem" Click="choiseItem_Click">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="#CC533E"/>
@@ -109,46 +130,30 @@
                                 <!--Craft Items-->
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
 
-                                    <Rectangle Width="100" Stroke="Black" Height="88" Margin="25,5,0,10">
-                                        <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/initial/Log.png"/>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
+                                    <Image Height="100" Width="100" x:Name="itemOne" Source="/Image/initial/paper.png"/>
 
                                     <Label Content="+" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Rectangle Stroke="Black" Width="100" Height="88" Margin="0,5,0,10" HorizontalAlignment="Left">
-                                        <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/initial/fire.png"/>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
+                                    <Image Width="100" Height="100" Source="/Image/initial/paper.png"/>
 
                                     <Label Content="+" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Rectangle Stroke="Black" Width="100" Height="88" Margin="0,5,0,10" HorizontalAlignment="Left">
-                                        <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/initial/paper.png"/>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
+                                    <Image Width="100" Height="100" Source="/Image/initial/paper.png"/>
 
                                     <Label Content="=" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Rectangle Stroke="Black" Width="100" Height="88" Margin="0,5,0,10"  HorizontalAlignment="Left">
-                                        <Rectangle.Fill>
-                                            <ImageBrush ImageSource="/Image/initial/Charcoal.png"/>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
+                                    <Image Width="100" Height="100" Source="/Image/initial/paper.png"/>
 
 
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                    <TextBlock  Text="Name" Margin="48,0,0,0"  FontSize="25"/>
-                                    <TextBlock  Text="Name" Margin="52,0,0,0" FontSize="25" />
-                                    <TextBlock  Text="Name" Margin="52,0,0,0" FontSize="25"/>
-                                    <TextBlock  Text="Name" Margin="52,0,0,0" FontSize="25"/>
+                                    <TextBlock x:Name="txtOne" Text="Name" Margin="28,0,0,0"  FontSize="25"/>
+                                    <TextBlock x:Name="txtTwo" Text="Name" Margin="42,0,0,0" FontSize="25" />
+                                    <TextBlock x:Name="txtThree" Text="Name" Margin="52,0,0,0" FontSize="25"/>
+                                    <TextBlock x:Name="txtResult"  Text="Name" Margin="62,0,0,0" FontSize="25"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="2" Margin="0,30,0,0">
-                                    <Button Content="Craft" FontSize="25" Height="60" Width="256" HorizontalAlignment="Center">
+                                    <Button x:Name="BCraft" Click="BCraft_Click" Content="Craft" FontSize="25" Height="60" Width="256" HorizontalAlignment="Center">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Background" Value="#CC533E"/>
@@ -180,6 +185,7 @@
 
 
                     </Grid>
+                    <Button Width="180" HorizontalAlignment="Right" Margin="0,15,0,0" Content="All Resurs" Background="Beige" Click="Button_Click"/>
                 </StackPanel>
                 <!--End: Craft-->
 
@@ -244,6 +250,7 @@
 
 
                                 </StackPanel>
+                               
                             </Grid>
                         </StackPanel>
                     </Grid>

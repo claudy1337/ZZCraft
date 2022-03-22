@@ -27,7 +27,6 @@ namespace ZZCraft.Model
     
         public virtual DbSet<CraftDrop> CraftDrop { get; set; }
         public virtual DbSet<CraftRes> CraftRes { get; set; }
-        public virtual DbSet<InitialDrop> InitialDrop { get; set; }
         public virtual DbSet<InitialRes> InitialRes { get; set; }
         public virtual DbSet<Recipe> Recipe { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

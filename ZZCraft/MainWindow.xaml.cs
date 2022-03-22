@@ -26,12 +26,13 @@ namespace ZZCraft
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Model.BDCraftZZEntities2 db = new Model.BDCraftZZEntities2();
-        private DispatcherTimer _timer;
 
+        public static Model.BDCraftZZEntities2 db = new Model.BDCraftZZEntities2();
+        string[] itemList = new string[3] { "One", "Two", "Three"};
+
+        private DispatcherTimer _timer;
         public static readonly DependencyProperty TimeProperty = DependencyProperty.Register(
             "Time", typeof(TimeSpan), typeof(MainWindow), new PropertyMetadata(default(TimeSpan)));
-
         public static readonly DependencyProperty SecondsProperty = DependencyProperty.Register(
             "Seconds", typeof(int), typeof(MainWindow), new PropertyMetadata(default(int)));
 
@@ -50,16 +51,20 @@ namespace ZZCraft
         public void Refresh()
         {
             listView1.ItemsSource = null;
-            listView1.ItemsSource = db.InitialDrops.ToList();
+            listView2.ItemsSource = null;
+            listView1.ItemsSource = db.CraftDrop.ToList();
+            listView2.ItemsSource = db.InitialDrops.ToList();
+
+
         }
 
         private void OnTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             
         }
-
         private void BrndItem_Click(object sender, RoutedEventArgs e)
         {
+            Refresh();
             try
             {
                 _timer.Stop();
@@ -132,14 +137,68 @@ namespace ZZCraft
         {
             return new ObservableCollection<Initial>
             {
-                
+                new Initial { },
                
             };
         }
 
         private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Refresh();
             
+
+        }
+
+        private void BCraft_Click(object sender, RoutedEventArgs e)
+        {
+            testCraft testCraft = new testCraft();
+            testCraft.Show();
+            //listView1.SelectedItem = 
+            //Model.InitialRes initialRes = db.InitialRes.FirstOrDefault(a => a.id == );
+            //listView1.SelectedItem = db.InitialDrops;
+            //itemOne.ImageSource = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
+        }
+        int count = 0;
+        private void choiseItem_Click(object sender, RoutedEventArgs e)
+        {
+            count++;
+            string[] teamUserList = new string[3] { "One", "Two", "Three" };
+
+            for (int i = 0; i < count; i++)
+            {
+                if (listView1.SelectedIndex != -1)
+                {
+                    teamUserList[i] = listView1.SelectedItem.ToString();
+                    switch (count)
+                    {
+                        case 1:
+                            txtOne.Text = teamUserList[i];
+                            break;
+                        case 2:
+                            txtTwo.Text = teamUserList[i];
+                            break;
+                        case 3:
+                            txtThree.Text = teamUserList[i];
+                            break;
+                        default:
+                            MessageBox.Show("фул item");
+                            count = 0;
+                            break;
+                    }
+
+                }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            testCraft testCraft = new testCraft();
+            testCraft.Show();
+        }
+
+        private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
