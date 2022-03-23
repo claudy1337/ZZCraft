@@ -34,12 +34,11 @@
                         <StackPanel Grid.Column="0">
                             <!--list initial drop item-->
                             <TextBlock Text="Initial Item" HorizontalAlignment="Center" FontSize="22"/>
-                            <ListView Name="listView2" Background="White" Height="464" SelectionChanged="listView2_SelectionChanged" >
+                            <ListView Name="listView2" Background="White" Height="439" SelectionChanged="listView2_SelectionChanged" >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
                                             <Image Source="{Binding InitialRes.img}" Width="100" Height="100"/>
-
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{Binding InitialRes.Name}" FontSize="22"/>
                                                 <TextBlock Text="{Binding Counts}" Margin="20,0,0,0" HorizontalAlignment="Center" FontSize="22"/>
@@ -186,7 +185,7 @@
 
                     </Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="Update" x:Name="BUpdate" Click="BUpdate_Click" Width="120" Margin="0,15,15,0" Background="#CC533E"/>
+
                         <Button Width="120"  HorizontalAlignment="Right" Margin="0,15,0,0" Content="All Resurs" Background="#CC533E" Click="Button_Click"/>
                     </StackPanel>
                     
