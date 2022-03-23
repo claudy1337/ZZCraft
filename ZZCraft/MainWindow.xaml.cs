@@ -17,9 +17,6 @@ using ZZCraft.Model.Connection;
 using ZZCraft.item;
 using System.Collections.ObjectModel;
 using System.Reflection;
-
-
-
 namespace ZZCraft
 {
     /// <summary>
@@ -39,6 +36,7 @@ namespace ZZCraft
 
         public MainWindow()
         {
+            
             InitializeComponent();
             Refresh();
             Seconds = 10;
@@ -56,12 +54,6 @@ namespace ZZCraft
             listView1.ItemsSource = db.CraftDrop.ToList();
             listView2.ItemsSource = db.InitialDrops.ToList();
 
-
-        }
-
-        private void OnTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            
         }
         private void BrndItem_Click(object sender, RoutedEventArgs e)
         {
@@ -71,7 +63,7 @@ namespace ZZCraft
                 _timer.Stop();
                 Time = TimeSpan.FromSeconds(Seconds);
                 _timer.Start();
-
+                Refresh();
                 BrndItem.IsEnabled = true;
                 Random random = new Random();
                 int resurs = random.Next(1, 19);
@@ -83,7 +75,6 @@ namespace ZZCraft
                 CountRnd.Text = counts.ToString();
                 imageRnd.Source = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
                 NameRnd.Text = initial.Name.ToString();
-
                 if (findInitialDrop != null)
                 {
                     findInitialDrop = db.InitialDrops.FirstOrDefault(o => o.iDInitialRes == resurs);
@@ -92,7 +83,6 @@ namespace ZZCraft
                         findInitialDrop.Counts += counts;
                         db.SaveChanges();
                         MessageBox.Show("double item");
-                        Refresh();
                         //return;
                     }
                 }
@@ -100,7 +90,6 @@ namespace ZZCraft
                 {
                     db.InitialDrops.Add(usrInvent);
                     db.SaveChanges();
-                    Refresh();
                 }
             }
             catch (NullReferenceException ex)
@@ -119,8 +108,6 @@ namespace ZZCraft
             get { return (TimeSpan)GetValue(TimeProperty); }
             set { SetValue(TimeProperty, value); }
         }
-
-
         private void Timer_Tick(object sender, EventArgs e)
         {
             Time = Time.Subtract(TimeSpan.FromSeconds(1));
@@ -130,36 +117,16 @@ namespace ZZCraft
                 timer.Stop();
                 
             }
-        }
-
-        
-        private ObservableCollection<Initial> GetEvents()
-        {
-           
-            return new ObservableCollection<Initial>
-            {
-                new Initial { },
-               
-            };
-        }
-
+        }  
         private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Refresh();
-           
+            Refresh(); 
         }
-
         private void BCraft_Click(object sender, RoutedEventArgs e)
         {
-           
+            
         }
         int count = 0;
-        private void choiseItem_Click(object sender, RoutedEventArgs e)
-        {
-                       
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             testCraft testCraft = new testCraft();
@@ -170,8 +137,35 @@ namespace ZZCraft
         {
             var item = (Model.InitialDrops)listView2.SelectedItem;
             MessageBox.Show(item.ID.ToString());
+            
+            Model.InitialDrops initialDrops = db.InitialDrops.FirstOrDefault(i => i.ID == item.ID);
+            Model.InitialRes initial = db.InitialRes.FirstOrDefault(b => b.id == initialDrops.iDInitialRes);
             MyInitial.Add(item);
+
+            if (MyInitial.Count == 1 && initial != null)
+            {
+                itemOne.Source = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
+                txtOne.Text = initial.Name;
+            }
+            else if (MyInitial.Count == 2 && initial != null)
+            {
+                itemTwo.Source = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
+                txtTwo.Text = initial.Name;
+            }
+            else if (MyInitial.Count == 3 && initial != null)
+            {
+                itemThree.Source = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
+                txtThree.Text = initial.Name;
+            }
+           
             MessageBox.Show(MyInitial.Count.ToString());
+
+        }
+
+        private void BUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            MyInitial.Clear();
         }
     }
 }

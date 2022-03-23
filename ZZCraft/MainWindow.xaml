@@ -74,7 +74,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" VerticalAlignment="Center" Height="52">
-                    <Button Content="Сhoose" FontSize="25" Height="53" Width="218" x:Name="choiseItem" Click="choiseItem_Click">
+                    <Button Content="Сhoose" FontSize="25" Height="53" Width="218" x:Name="choiseItem" >
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="#CC533E"/>
@@ -134,11 +134,11 @@
 
                                     <Label Content="+" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Image Width="100" Height="100" Source="/Image/initial/paper.png"/>
+                                    <Image Width="100" x:Name="itemTwo" Height="100" Source="/Image/initial/paper.png"/>
 
                                     <Label Content="+" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Image Width="100" Height="100" Source="/Image/initial/paper.png"/>
+                                    <Image Width="100" x:Name="itemThree" Height="100" Source="/Image/initial/paper.png"/>
 
                                     <Label Content="=" VerticalAlignment="Center" FontSize="20"/>
 
@@ -147,10 +147,10 @@
 
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                    <TextBlock x:Name="txtOne" Text="Name" Margin="28,0,0,0"  FontSize="25"/>
-                                    <TextBlock x:Name="txtTwo" Text="Name" Margin="42,0,0,0" FontSize="25" />
-                                    <TextBlock x:Name="txtThree" Text="Name" Margin="52,0,0,0" FontSize="25"/>
-                                    <TextBlock x:Name="txtResult"  Text="Name" Margin="62,0,0,0" FontSize="25"/>
+                                    <TextBlock x:Name="txtOne" FontSize="25"/>
+                                    <TextBlock x:Name="txtTwo" Margin="22,0,0,0" FontSize="25" />
+                                    <TextBlock x:Name="txtThree" Margin="32,0,0,0" FontSize="25"/>
+                                    <TextBlock x:Name="txtResult" Margin="32,0,0,0" FontSize="25"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="2" Margin="0,30,0,0">
                                     <Button x:Name="BCraft" Click="BCraft_Click" Content="Craft" FontSize="25" Height="60" Width="256" HorizontalAlignment="Center">
@@ -185,7 +185,11 @@
 
 
                     </Grid>
-                    <Button Width="120"  HorizontalAlignment="Right" Margin="0,15,0,0" Content="All Resurs" Background="#CC533E" Click="Button_Click"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Update" x:Name="BUpdate" Click="BUpdate_Click" Width="120" Margin="0,15,15,0" Background="#CC533E"/>
+                        <Button Width="120"  HorizontalAlignment="Right" Margin="0,15,0,0" Content="All Resurs" Background="#CC533E" Click="Button_Click"/>
+                    </StackPanel>
+                    
                 </StackPanel>
                 <!--End: Craft-->
 
