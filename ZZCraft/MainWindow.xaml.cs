@@ -125,14 +125,21 @@ namespace ZZCraft
         }
         private void BCraft_Click(object sender, RoutedEventArgs e)
         {
+            
             var one = itemList[0];
             var two = itemList[1];
             var three = itemList[2];
-            
-            Model.Recipe recipe = db.Recipe.FirstOrDefault(u => u.objectOne.ToString() ==one  && u.objectTwo.ToString() == two && u.objectThree.ToString() ==three);
+            Model.Recipe recipe = db.Recipe.FirstOrDefault(r => r.objectOne.ToString() ==one  && r.objectTwo.ToString() == two && r.objectThree.ToString() ==three);
+            Model.CraftRes craftRes = db.CraftRes.FirstOrDefault(c => c.idRecipe == recipe.id);
+            Model.CraftDrop craftDrop = new Model.CraftDrop() { idCraftDrop = craftRes.id, Count = 1};
             if (recipe != null)
             {
                 MessageBox.Show(recipe.id.ToString());
+                resultItem.Source = new BitmapImage(new Uri(craftRes.img, UriKind.RelativeOrAbsolute));
+                txtResult.Text = craftRes.Name.ToString();
+                db.CraftDrop.Add(craftDrop);
+                db.SaveChanges();
+                Refresh();
             }
             
             
@@ -146,7 +153,7 @@ namespace ZZCraft
         private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var item = (Model.InitialDrops)listView2.SelectedItem;
-            MessageBox.Show(item.ID.ToString());
+           // MessageBox.Show(item.ID.ToString());
             
             Model.InitialDrops initialDrops = db.InitialDrops.FirstOrDefault(i => i.ID == item.ID);
             Model.InitialRes initial = db.InitialRes.FirstOrDefault(b => b.id == initialDrops.iDInitialRes);

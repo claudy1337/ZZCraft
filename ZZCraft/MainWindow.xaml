@@ -141,7 +141,7 @@
 
                                     <Label Content="=" VerticalAlignment="Center" FontSize="20"/>
 
-                                    <Image Width="100" Height="100" Source="/Image/initial/paper.png"/>
+                                    <Image Width="100" x:Name="resultItem" Height="100" Source="/Image/initial/paper.png"/>
 
 
                                 </StackPanel>
