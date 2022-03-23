@@ -185,7 +185,7 @@
 
 
                     </Grid>
-                    <Button Width="180" HorizontalAlignment="Right" Margin="0,15,0,0" Content="All Resurs" Background="Beige" Click="Button_Click"/>
+                    <Button Width="120"  HorizontalAlignment="Right" Margin="0,15,0,0" Content="All Resurs" Background="#CC533E" Click="Button_Click"/>
                 </StackPanel>
                 <!--End: Craft-->
 

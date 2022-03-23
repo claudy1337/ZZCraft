@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using ZZCraft.Model.Connection;
 using ZZCraft.item;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 
 
@@ -26,10 +27,10 @@ namespace ZZCraft
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
         public static Model.BDCraftZZEntities2 db = new Model.BDCraftZZEntities2();
         string[] itemList = new string[3] { "One", "Two", "Three"};
-
+        public ObservableCollection<Model.InitialDrops> MyInitial = new ObservableCollection<Model.InitialDrops>();
         private DispatcherTimer _timer;
         public static readonly DependencyProperty TimeProperty = DependencyProperty.Register(
             "Time", typeof(TimeSpan), typeof(MainWindow), new PropertyMetadata(default(TimeSpan)));
@@ -131,10 +132,10 @@ namespace ZZCraft
             }
         }
 
-        public ObservableCollection<Initial> MyInitial { get; set; }
-
+        
         private ObservableCollection<Initial> GetEvents()
         {
+           
             return new ObservableCollection<Initial>
             {
                 new Initial { },
@@ -145,49 +146,18 @@ namespace ZZCraft
         private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Refresh();
-            
-
+           
         }
 
         private void BCraft_Click(object sender, RoutedEventArgs e)
         {
-            testCraft testCraft = new testCraft();
-            testCraft.Show();
-            //listView1.SelectedItem = 
-            //Model.InitialRes initialRes = db.InitialRes.FirstOrDefault(a => a.id == );
-            //listView1.SelectedItem = db.InitialDrops;
-            //itemOne.ImageSource = new BitmapImage(new Uri(initial.img, UriKind.RelativeOrAbsolute));
+           
         }
         int count = 0;
         private void choiseItem_Click(object sender, RoutedEventArgs e)
         {
-            count++;
-            string[] teamUserList = new string[3] { "One", "Two", "Three" };
+                       
 
-            for (int i = 0; i < count; i++)
-            {
-                if (listView1.SelectedIndex != -1)
-                {
-                    teamUserList[i] = listView1.SelectedItem.ToString();
-                    switch (count)
-                    {
-                        case 1:
-                            txtOne.Text = teamUserList[i];
-                            break;
-                        case 2:
-                            txtTwo.Text = teamUserList[i];
-                            break;
-                        case 3:
-                            txtThree.Text = teamUserList[i];
-                            break;
-                        default:
-                            MessageBox.Show("фул item");
-                            count = 0;
-                            break;
-                    }
-
-                }
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -198,7 +168,10 @@ namespace ZZCraft
 
         private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            var item = (Model.InitialDrops)listView2.SelectedItem;
+            MessageBox.Show(item.ID.ToString());
+            MyInitial.Add(item);
+            MessageBox.Show(MyInitial.Count.ToString());
         }
     }
 }
