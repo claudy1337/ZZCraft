@@ -27,6 +27,7 @@ namespace ZZCraft
             InitializeComponent();
             listView1.ItemsSource = db.CraftRes.ToList();
             listView.ItemsSource = db.InitialRes.ToList();
+            //listv.ItemsSource = db.Recipe.ToList();
 
         }
         

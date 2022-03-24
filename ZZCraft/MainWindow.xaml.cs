@@ -84,6 +84,7 @@ namespace ZZCraft
                         db.SaveChanges();
                         MessageBox.Show("double item");
                         //return;
+                        Refresh();
                     }
                 }
                 else
@@ -95,7 +96,8 @@ namespace ZZCraft
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show(ex.Message);
+                listView1.ItemsSource = db.CraftDrop.ToList();
+                listView2.ItemsSource = db.InitialDrops.ToList();
             }
         }
         public int Seconds
@@ -129,16 +131,28 @@ namespace ZZCraft
             var one = itemList[0];
             var two = itemList[1];
             var three = itemList[2];
-            Model.Recipe recipe = db.Recipe.FirstOrDefault(r => r.objectOne.ToString() ==one  && r.objectTwo.ToString() == two && r.objectThree.ToString() ==three);
-            Model.CraftRes craftRes = db.CraftRes.FirstOrDefault(c => c.idRecipe == recipe.id);
-            Model.CraftDrop craftDrop = new Model.CraftDrop() { idCraftDrop = craftRes.id, Count = 1};
-            if (recipe != null)
+            try
             {
-                MessageBox.Show(recipe.id.ToString());
-                resultItem.Source = new BitmapImage(new Uri(craftRes.img, UriKind.RelativeOrAbsolute));
-                txtResult.Text = craftRes.Name.ToString();
-                db.CraftDrop.Add(craftDrop);
-                db.SaveChanges();
+                Model.Recipe recipe = db.Recipe.FirstOrDefault(r => r.objectOne.ToString() == one && r.objectTwo.ToString() == two && r.objectThree.ToString() == three);
+                Model.CraftRes craftRes = db.CraftRes.FirstOrDefault(c => c.idRecipe == recipe.id);
+                Model.CraftDrop craftDrop = new Model.CraftDrop() { idCraftDrop = craftRes.id, Count = 1 };
+                if (recipe != null)
+                {
+                    MessageBox.Show(recipe.id.ToString());
+                    resultItem.Source = new BitmapImage(new Uri(craftRes.img, UriKind.RelativeOrAbsolute));
+                    txtResult.Text = craftRes.Name.ToString();
+                    db.CraftDrop.Add(craftDrop);
+                    db.SaveChanges();
+                    Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("item не найден");
+                }
+            }
+            catch (System.Reflection.TargetException ex)
+            {
+                MessageBox.Show(ex.Message);
                 Refresh();
             }
             
